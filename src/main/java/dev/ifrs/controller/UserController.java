@@ -1,8 +1,9 @@
 package dev.ifrs.controller;
 
-import dev.ifrs.dto.TransferDto;
-import dev.ifrs.service.TransferService;
- 
+import java.util.HashMap;
+
+import dev.ifrs.dto.UserDto;
+import dev.ifrs.service.UserService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -10,29 +11,27 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.util.HashMap;
- 
-@Path("/transfer")
-public class TransferController {
- 
+
+@Path("/user")
+public class UserController {
     @Inject
-    TransferService transferService;
- 
+    UserService userService;
+
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response
-                .ok(transferService.findAll())
+                .ok(userService.findAll())
                 .build();
     }
- 
+
     @POST
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(TransferDto transferDto) {
+    public Response create(UserDto userDto) {
         try {
-            Long id = transferService.create(transferDto);
+            Long id = userService.create(userDto);
             return Response // 200
                     .ok(
                             new HashMap() {{
